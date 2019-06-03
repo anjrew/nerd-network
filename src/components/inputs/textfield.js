@@ -10,9 +10,7 @@ export class TextField extends React.Component{
         this.placeholder = props.placeholder;
         this.value =props.value;
         this.required = props.required;
-        this.handleChange = props.handleChange;
-        console.log(this);
-    }
+        this.handleChange = props.handleChange;    }
 
     render(){
         return (

@@ -15,7 +15,6 @@ export default class CenteredColumn extends React.Component{
         };
     }
     render(){
-        console.log(this);
         return (
             <div style={this.sytle} className={'centeredColumn'}>
                 {this.children}

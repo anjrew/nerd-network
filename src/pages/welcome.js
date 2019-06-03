@@ -1,13 +1,15 @@
 import React from 'react';
 import Routes from '../data/routes';
+import { CSSTransition, TransitionGroup,} from 'react-transition-group';
 
 // Components
 import { Logo } from '../components/graphics/logo';
 import { SafeArea } from '../components/layout/safe_area';
 import CenteredColumn from '../components/layout/centered_column';
-import { HashRouter, Route } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import { Registration } from '../pages/registration';
 import { Login } from '../pages/login';
+
 
 
 export class Welcome extends React.Component{
@@ -19,10 +21,23 @@ export class Welcome extends React.Component{
                     <h2>Welcome to the Nerd Network</h2>
                     <Logo/>
                     <HashRouter>
-                        <React.Fragment>
-                            <Route exact path={ Routes.home } component={ Registration } />
-                            <Route path={ Routes.login } component={ Login }/>
-                        </React.Fragment>
+                        <Route render= {({location}) => {
+                            console.log(location);
+                            return(
+                                <TransitionGroup>
+                                    <CSSTransition
+                                        key={location.key}
+                                        timeout= {450}
+                                        classNames="fade"
+                                    >                
+                                        <Switch location={location}>
+                                            <Route exact path={ Routes.home } component={ Registration }/>
+                                            <Route path={ Routes.login } component={ Login }/>
+                                        </Switch>
+                                    </CSSTransition>
+                                </TransitionGroup>);}
+                        }
+                        />
                     </HashRouter>
                 </CenteredColumn>
             </SafeArea>
