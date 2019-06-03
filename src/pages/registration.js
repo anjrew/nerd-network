@@ -28,7 +28,7 @@ export class Registration extends React.Component{
                     <TextField inputType="text" label="Password" id={db.password} handleChange={this.handleChange} required/>
                     <button onClick={() => this.submit()}>Sign-up</button>
                 </CenteredColumn>
-                <Link to={Routes.login}>Click here to Log in!</Link>
+                <Link className='link-button' to={Routes.login}>Click here to Log in!</Link>
             </React.Fragment>
         );
     }

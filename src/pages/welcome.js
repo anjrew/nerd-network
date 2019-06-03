@@ -7,14 +7,10 @@ import { SafeArea } from '../components/layout/safe_area';
 import CenteredColumn from '../components/layout/centered_column';
 import { HashRouter, Route } from 'react-router-dom';
 import { Registration } from '../pages/registration';
+import { Login } from '../pages/login';
 
 
 export class Welcome extends React.Component{
-
-    constructor (props) {
-        super(props);
-        this.state = {};
-    }
 
     render(){
         return (
@@ -24,16 +20,12 @@ export class Welcome extends React.Component{
                     <Logo/>
                     <HashRouter>
                         <React.Fragment>
-                            <Route exact path={ Routes.registration } compnent={ Registration} />
-                            <Route exact path={ Routes.login } compnent={ Login }/>
+                            <Route exact path={ Routes.home } component={ Registration } />
+                            <Route path={ Routes.login } component={ Login }/>
                         </React.Fragment>
                     </HashRouter>
                 </CenteredColumn>
             </SafeArea>
         );
-    }
-
-    switchToLogin(){
-        console.log('Switching to login');
     }
 }

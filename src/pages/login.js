@@ -9,7 +9,7 @@ import CenteredColumn from '../components/layout/centered_column';
 import ErrorMessage from '../components/text/error_message';
 import Routes from '../data/routes';
 
-export class Registration extends React.Component{
+export class Login extends React.Component{
 
     constructor (props) {
         super(props);
@@ -25,7 +25,7 @@ export class Registration extends React.Component{
                     <TextField inputType="text" label="Password" id={db.password} handleChange={this.handleChange} required/>
                     <button onClick={() => this.submit()}>Login</button>
                 </CenteredColumn>
-                <Link to={Routes.registration}>Click here to sign up!</Link>
+                <Link className='link-button' to={Routes.home}>Click here to sign up!</Link>
             </React.Fragment>
         );
     }
@@ -57,9 +57,5 @@ export class Registration extends React.Component{
                 error: e
             });
         });
-    }
-
-    switchToLogin(){
-        console.log('Switching to login');
     }
 }

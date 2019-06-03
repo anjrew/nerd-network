@@ -43,7 +43,7 @@ if (process.env.NODE_ENV != 'production') {
 // Direct the user to the welcome screen if they are not logged in
 // If there is a user ID the user must be logged in.
 app.get('/welcome', (req, res) => {
-    if (!req.session.userId) {
+    if (req.session.userId) {
         res.redirec('/');
     } else {
         res.sendFile(__dirname + '/index.html');
@@ -57,8 +57,6 @@ app.get('*', function(req, res) {
 app.listen(8080, function() {
     console.log("I'm listening.");
 });
-
-
 
 function setupApp () {
 
