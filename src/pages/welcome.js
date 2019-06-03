@@ -9,6 +9,7 @@ import CenteredColumn from '../components/layout/centered_column';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { Registration } from '../pages/registration';
 import { Login } from '../pages/login';
+import { OverLappedChildren } from '../components/layout/overlapped_children';
 
 
 
@@ -30,12 +31,12 @@ export class Welcome extends React.Component{
                                         timeout= {450}
                                         classNames="fade"
                                     >   
-                                    <OverLappedChildren>             
-                                        <Switch location={location}>
-                                            <Route exact path={ Routes.home } component={ Registration }/>
-                                            <Route path={ Routes.login } component={ Login }/>
-                                        </Switch>
-                                    <OverLappedChildren>             
+                                        <OverLappedChildren>             
+                                            <Switch location={location}>
+                                                <Route exact path={ Routes.home } component={ Registration }/>
+                                                <Route path={ Routes.login } component={ Login }/>
+                                            </Switch>
+                                        </OverLappedChildren>             
                                     </CSSTransition>
                                 </TransitionGroup>);}
                         }
