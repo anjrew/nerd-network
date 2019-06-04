@@ -9,7 +9,7 @@ export class Logo extends React.Component{
             height: props.height || '200px',
             width: props.height || '200px',
             objectFit: CoverageMap,
-
+            margin: props.margin || '5px',
         };
     }
 

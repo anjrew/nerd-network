@@ -1,7 +1,9 @@
 const routes =  {
     registration: "/registration",
     login: "/login",
-    home: "/"
+    home: "/",
+    upload: "/upload",
+    user: "/user"
 };
 
 module.exports = routes;

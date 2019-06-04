@@ -3,21 +3,21 @@ const express = require('express');
 const router = express.Router();
 const routes = require('../routers/routes');
 const cookies = require('../utils/cookies');
-const { db, ids } = require('../utils/db');
+const { db } = require('../utils/db');
 const encryption = require('../utils/encryption');
 // const userLoggedInAtEntry = require('../utils/middleware').userLoggedInAtEntry;
 const print = require('../utils/print');
 const chalk = require('chalk');
 
 router.route(routes.registration)
-    .get((req, res, next) => {
+    .get((req, res) => {
         console.log('here');
         res.json({
             error: 'This asgvav'
         });
     })
 
-    .post( async (req, res) => {
+    .post(async (req, res) => {
 
         const firstName = req.body.firstName;
         const lastName = req.body.lastName;

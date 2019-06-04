@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const routes = require('../routers/routes');
-const db = require('../utils/db');
+const routes = require('./routes');
+const { db } = require('../utils/db');
 const chalk = require('chalk');
 // Used to upload files to the hard drive
 const multer = require('multer');
 // Changes the name of the file to be somthing unique
 const uidSafe = require('uid-safe');
 const path = require('path');
-const s3 = require('../utils/s3');
+const s3 = require('../utils/s3s3');
 const encryption = require('../utils/encryption');
 
 let secrets;
@@ -39,7 +39,7 @@ const uploader = multer({
     }
 });
 
-router.route(ROUTES.UPLOAD)
+router.route(routes.upload)
     // .all((req, res) => console.log(chalk.blue('Here')))
     .post(uploader.single('file'), s3.upload, (req, res) => {
     // If nothing went wrong the file is already in the uploads directory

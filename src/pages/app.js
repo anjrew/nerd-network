@@ -1,4 +1,7 @@
 import React from 'react';
+import axios from '../react_utils/axios';
+import routes from '../react_utils/react_routes';
+
 
 // Components
 import { Logo } from '../components/graphics/logo';
@@ -6,15 +9,19 @@ import { SafeArea } from '../components/layout/safe_area';
 import { CenteredColumn } from '../components/layout/centered_column';
 import { Row } from '../components/layout/row';
 import { Avatar } from '../components/graphics/avatar';
-import { Container } from '../components/boxes/container';
+import { Uploader } from '../components/modules/Uploader';
 
 export class App extends React.Component{
 
     constructor(){
         super();
-        this.state = {};
+        this.state = {
+            uploaderVisible: true
+        };
+
         this.dismissLoader = this.dismissLoader.bind(this);
         this.avatarClicked = this.avatarClicked.bind(this);
+        this.uploadClicked = this.uploadClicked.bind(this);
     }
 
     render(){
@@ -22,21 +29,26 @@ export class App extends React.Component{
             <CenteredColumn>
                 <Row backgroundColor={ 'red' } padding={ '20px' }>
                     <Logo height={ '100px' } width={ "100px" }/>
-                    <Avatar backgroundColor={ 'white' } onClick={this.avatarClicked}/>
+                    <Avatar backgroundColor={ 'white' } onClick={ this.avatarClicked }/>
                 </Row>
                 <SafeArea>
-                    <Container margin="20px" padding='20px' borderRadius="20px" borderWidth="3px">
-                        <Row justifyContent={'flex-end'} >
-                            <button onClick={this.dismissLoader}></button>
-                        </Row>
-                    </Container>
+                    { this.state.uploaderVisible && (<Uploader/>) }
                 </SafeArea>
             </CenteredColumn>
         );
     }
 
-    componentDidMount(){
-
+    componentDidMount() {
+        axios.get(routes.user).then(res => {
+            this.setState({
+                bio: res.data.bio,
+                profile_creation_date: res.data.created_at,
+                email: res.data.email,
+                name: res.data.name,
+                surname: res.data.surname,
+                imageUrl: res.data.pic_url || "./placeholder.gif"
+            });
+        });
     }
 
     dismissLoader(){
@@ -45,6 +57,15 @@ export class App extends React.Component{
     }
 
     avatarClicked(){
-        console.log('Avatar Clicked ', this);
+        console.log('Avatar Clicked and this is', this);
+        if (this.state.uploaderVisible) {
+            this.setState({ uploaderVisible: false });
+        } else {
+            this.setState({ uploaderVisible: true });
+        }
+    }
+
+    uploadClicked(){
+        console.log('Upload Button Clicked and this is', this);
     }
 }

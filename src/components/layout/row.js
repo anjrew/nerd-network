@@ -7,10 +7,10 @@ export class Row extends React.Component{
         this.children = props.children;
         this.style = { 
             display: 'flex', 
-            flexDirection: 'horizontal',
+            flexDirection: 'row',
             alignItems: props.alignItems || 'center',
             alignContent: props.alignContent || 'center',
-            justifyContent: props.spaceBetween || 'space-between',
+            justifyContent: props.justifyContent || 'space-between',
             width: props.width || '100%',
             backgroundColor: props.backgroundColor,
             padding: props.padding
