@@ -26,14 +26,16 @@ export class Welcome extends React.Component{
                             return(
                                 <TransitionGroup>
                                     <CSSTransition
-                                        key={location.key}
+                                        key={location.pathname}
                                         timeout= {450}
                                         classNames="fade"
-                                    >                
+                                    >   
+                                    <OverLappedChildren>             
                                         <Switch location={location}>
                                             <Route exact path={ Routes.home } component={ Registration }/>
                                             <Route path={ Routes.login } component={ Login }/>
                                         </Switch>
+                                    <OverLappedChildren>             
                                     </CSSTransition>
                                 </TransitionGroup>);}
                         }
