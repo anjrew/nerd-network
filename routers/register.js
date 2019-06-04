@@ -7,6 +7,7 @@ const { db, ids } = require('../utils/db');
 const encryption = require('../utils/encryption');
 const userLoggedInAtEntry = require('../utils/middleware').userLoggedInAtEntry;
 const print = require('../utils/print');
+const chalk = require('chalk');
 
 router.route(routes.registration)
     .get((req, res, next) => {
@@ -15,14 +16,22 @@ router.route(routes.registration)
     })
 
     .post( async (req, res) => {
-        if (!req.body.firstname || !req.body.lastname || !req.body.email || !req.body.password) {
+
+        const firstName = req.body.firstName;
+        const lastName = req.body.lastName;
+        const email = req.body.email;
+        const password = req.body.password;
+        console.log(chalk.blue(`REQ BODY IS:`), req.body);
+        
+        if (!firstName || !lastName || !email || !password) {
+
             print.error('Not all fields were filled');
             res.json({
                 error: "Not all fields were filled"
             });
         }
         const hashedP = await encryption.hashPassword(req.body.password);
-        const result = await db.addUser(req.body.firstname, req.body.lastname, req.body.email, hashedP);
+        const result = await db.addUser(firstName, lastName, email, hashedP);
         let id = result.rows[0].id;
         req.session[cookies.user] = id;
         res.json( result.rows[0] );
