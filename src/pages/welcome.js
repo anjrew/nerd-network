@@ -5,7 +5,7 @@ import { CSSTransition, TransitionGroup,} from 'react-transition-group';
 // Components
 import { Logo } from '../components/graphics/logo';
 import { SafeArea } from '../components/layout/safe_area';
-import CenteredColumn from '../components/layout/centered_column';
+import { CenteredColumn } from '../components/layout/centered_column';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { Registration } from '../pages/registration';
 import { Login } from '../pages/login';

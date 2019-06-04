@@ -1,13 +1,15 @@
 import React from 'react';
 import axios from '../utils/axios';
 import db from '../data/db';
-import { Link } from 'react-router-dom';
+import Routes from '../data/routes';
+
+
 
 // Components
 import { TextField } from '../components/inputs/textfield';
-import CenteredColumn from '../components/layout/centered_column';
-import ErrorMessage from '../components/text/error_message';
-import Routes from '../data/routes';
+import { CenteredColumn } from '../components/layout/centered_column';
+import { ErrorMessage } from '../components/text/error_message';
+import { Link } from 'react-router-dom';
 
 export class Login extends React.Component{
 

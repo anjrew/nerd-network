@@ -6,8 +6,8 @@ import Routes from '../data/routes';
 
 // Components
 import { TextField } from '../components/inputs/textfield';
-import CenteredColumn from '../components/layout/centered_column';
-import ErrorMessage from '../components/text/error_message';
+import { CenteredColumn } from '../components/layout/centered_column';
+import { ErrorMessage } from '../components/text/error_message';
 
 
 export class Registration extends React.Component{

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class CenteredColumn extends React.Component{
+export class CenteredColumn extends React.Component{
 
     constructor (props) {
         super(props);
