@@ -7,8 +7,8 @@ import { App } from './pages/app';
 console.log(location.pathname);
 
 ReactDOM.render(
-    <Welcome />,
-    // <App/>,
+    // <Welcome />,
+    <App/>,
     document.querySelector('main')
 );
 

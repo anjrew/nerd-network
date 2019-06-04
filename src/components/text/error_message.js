@@ -1,18 +1,29 @@
 import React from 'react';
+import { CSSTransition, TransitionGroup,} from 'react-transition-group';
+
 
 export class ErrorMessage extends React.Component{
 
     constructor (props) {
         super(props);
-        this.message = props.message;
+        this.message = props.children;
         this.style = {
-            color: "red"
+            color: "red",
+            padding: "20px"
         };
     }
 
     render(){
         return (
-            <h3 style={this.style}>{this.message}</h3>
+            <TransitionGroup>
+                <CSSTransition
+                    in={true}
+                    timeout= {450}
+                    classNames="scale"
+                > 
+                    <h3 style={this.style}>{this.message}</h3>
+                </CSSTransition>
+            </TransitionGroup>
         );
     }
 }

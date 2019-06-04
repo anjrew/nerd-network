@@ -5,14 +5,16 @@ const routes = require('../routers/routes');
 const cookies = require('../utils/cookies');
 const { db, ids } = require('../utils/db');
 const encryption = require('../utils/encryption');
-const userLoggedInAtEntry = require('../utils/middleware').userLoggedInAtEntry;
+// const userLoggedInAtEntry = require('../utils/middleware').userLoggedInAtEntry;
 const print = require('../utils/print');
 const chalk = require('chalk');
 
 router.route(routes.registration)
     .get((req, res, next) => {
         console.log('here');
-        res.json({});
+        res.json({
+            error: 'This asgvav'
+        });
     })
 
     .post( async (req, res) => {
@@ -29,12 +31,23 @@ router.route(routes.registration)
             res.json({
                 error: "Not all fields were filled"
             });
+        } else {
+
+            try {
+                
+                const hashedP = await encryption.hashPassword(req.body.password);
+                const result = await db.addUser(firstName, lastName, email, hashedP);
+                let id = result.rows[0].id;
+                req.session[cookies.user] = id;
+                res.json( result.rows[0] );
+                
+            } catch (e) {
+                print.error('Not all fields were filled');
+                res.json({
+                    error: "Not all fields were filled"
+                });
+            }
         }
-        const hashedP = await encryption.hashPassword(req.body.password);
-        const result = await db.addUser(firstName, lastName, email, hashedP);
-        let id = result.rows[0].id;
-        req.session[cookies.user] = id;
-        res.json( result.rows[0] );
     });
 
 

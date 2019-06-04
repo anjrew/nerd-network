@@ -1,9 +1,7 @@
 import React from 'react';
 import axios from '../react_utils/axios';
 import db from '../react_utils/ids';
-import Routes from '../react_utils/react_routes';
-
-
+import routes from '../react_utils/react_routes';
 
 // Components
 import { TextField } from '../components/inputs/textfield';
@@ -16,6 +14,7 @@ export class Login extends React.Component{
     constructor (props) {
         super(props);
         this.state = {};
+        this.handleChange = this.handleChange.bind(this);
     }
 
     render(){
@@ -23,11 +22,11 @@ export class Login extends React.Component{
             <React.Fragment>
                 {this.state.error && <ErrorMessage>{this.state.error}</ErrorMessage>}
                 <CenteredColumn>
-                    <TextField inputType="text" label="Email" id={db.email} handleChange={this.handleChange} required/>
+                    <TextField inputType="email" label="Email" id={db.email} handleChange={this.handleChange} required/>
                     <TextField inputType="password" label="Password" id={db.password} handleChange={this.handleChange} required/>
                     <button onClick={() => this.submit()}>Login</button>
                 </CenteredColumn>
-                <Link className='link-button' to={Routes.home}>Click here to sign up!</Link>
+                <Link className='link-button' to={routes.home}>Click here to sign up!</Link>
             </React.Fragment>
         );
     }
@@ -39,24 +38,28 @@ export class Login extends React.Component{
         });
     }
 
+    
     submit(){
         console.log('Sign up button pressed');
-        axios.post('/register', {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
+        console.log(this.state);
+        axios.post(routes.login, {
             email: this.state.email,
             password: this.state.password,
         }).then((response) => {
+            console.log('The Login got a response of', response);
             if (response.success){
                 location.replace('/');
-            } else {
+            } else if (response.data.error){
+                console.log('Logging Error');
                 this.setState({
-                    error: response.error,
+                    error: response.data.error,
                 });
             }
         }).catch((e) =>{
+            console.log('The error came from the Axios call: ', e);
+            console.log('This in catch is :', this);
             this.setState({
-                error: e
+                error: 'There was an Error from the server. Check your details.'
             });
         });
     }

@@ -8,6 +8,8 @@ import { TextField } from '../components/inputs/textfield';
 import { CenteredColumn } from '../components/layout/centered_column';
 import { ErrorMessage } from '../components/text/error_message';
 import routes from '../react_utils/react_routes';
+import { CSSTransition, TransitionGroup,} from 'react-transition-group';
+
 
 export class Registration extends React.Component{
 
@@ -18,14 +20,15 @@ export class Registration extends React.Component{
     }
 
     render(){
-        console.log(this.state);
+        console.log("Rendering this state", this.state);
+        console.log("this.state.error is ", this.state.error);
         return (
             <React.Fragment>
                 {this.state.error && <ErrorMessage>{this.state.error}</ErrorMessage>}
                 <CenteredColumn>
                     <TextField inputType="text" label="First name" id={id.firstName} handleChange={this.handleChange} required/>
                     <TextField inputType="text" label="Last name" id={id.lastName} handleChange={this.handleChange} required/>
-                    <TextField inputType="text" label="Email" id={id.email} handleChange={this.handleChange} required/>
+                    <TextField inputType="email" label="Email" id={id.email} handleChange={this.handleChange} required/>
                     <TextField inputType="password" label="Password" id={id.password} handleChange={this.handleChange} required/>
                     <button onClick={() => this.submit()}>Sign-up</button>
                 </CenteredColumn>
@@ -50,15 +53,18 @@ export class Registration extends React.Component{
             email: this.state.email,
             password: this.state.password,
         }).then((response) => {
+            console.log('The signup got a response of', response);
             if (response.success){
                 location.replace('/');
-            } else {
+            } else if (response.data.error){
+                console.log('Logging Error');
                 this.setState({
-                    error: response.error,
+                    error: response.data.error,
                 });
             }
         }).catch((e) =>{
-            console.log(e);
+            console.log('The error came from the Axios call: ', e);
+            console.log('This is catch is :', this);
             this.setState({
                 error: e
             });
