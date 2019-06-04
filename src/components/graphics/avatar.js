@@ -1,6 +1,3 @@
-
-
-
 import React from 'react';
 
 export class Avatar extends React.Component{
@@ -9,7 +6,8 @@ export class Avatar extends React.Component{
         super(props);
         this.url =  props.url || '/assets/images/nerd-avatar.png',
         this.description =  props.description,
-        this.style = { 
+        this.onClick = props.onClick,
+        this.style = props.style ? props.style : { 
             backgroundColor: props.backgroundColor,
             padding: props.padding || '5px',
             margin: props.margin || '5px',
@@ -21,7 +19,7 @@ export class Avatar extends React.Component{
                     
     render(){
         return (
-            <img style={this.style} src={this.url} alt={this.description}/>
+            <img style={this.style} src={this.url} alt={this.description} onClick={this.onClick}/>
         );
     }
 }
