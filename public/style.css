@@ -91,7 +91,6 @@ input[type="text"]:hover,  input[type="password"]:hover{
 }
 
 .fade-enter {
-    animation-delay: 200ms;
     opacity: 0.01;
 }
 
@@ -101,7 +100,6 @@ input[type="text"]:hover,  input[type="password"]:hover{
 }
 
 .fade-exit {
-    animation-delay: 200ms;
     opacity: 1;
 }
 
