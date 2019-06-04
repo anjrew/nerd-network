@@ -6,8 +6,8 @@ export class Logo extends React.Component{
     constructor (props) {
         super(props);
         this.style = {
-            height: props.height,
-            width: props.height,
+            height: props.height || '200px',
+            width: props.height || '200px',
             objectFit: CoverageMap,
 
         };
@@ -15,7 +15,7 @@ export class Logo extends React.Component{
 
     render(){
         return (
-            <img style={ this.style } className={'logoImage'} src='/assets/images/nerd-logo.png'/>
+            <img style={ this.style }  src='/assets/images/nerd-logo.png'/>
         );
     }
 }

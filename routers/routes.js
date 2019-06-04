@@ -1,7 +1,7 @@
-const Routes =  {
+const routes =  {
     registration: "/registration",
     login: "/login",
     home: "/"
 };
 
-export default Routes;
+module.exports = routes;

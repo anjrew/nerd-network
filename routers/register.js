@@ -1,16 +1,17 @@
 
 const express = require('express');
 const router = express.Router();
-const ROUTES = require('../src/react_utils/routes');
+const routes = require('../routers/routes');
 const cookies = require('../utils/cookies');
 const { db, ids } = require('../utils/db');
 const encryption = require('../utils/encryption');
 const userLoggedInAtEntry = require('../utils/middleware').userLoggedInAtEntry;
 const print = require('../utils/print');
 
-router.route(ROUTES.REGISTER)
-    .get(userLoggedInAtEntry, (req, res, next) => {
-        
+router.route(routes.registration)
+    .get((req, res, next) => {
+        console.log('here');
+        res.json({});
     })
 
     .post( async (req, res) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from '../react_utils/axios';
 import db from '../react_utils/ids';
-import Routes from '../react_utils/routes';
+import Routes from '../react_utils/react_routes';
 
 
 

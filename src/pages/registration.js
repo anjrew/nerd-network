@@ -2,7 +2,7 @@ import React from 'react';
 import axios from '../react_utils/axios';
 import id from '../react_utils/ids';
 import { Link } from 'react-router-dom';
-import Routes from '../react_utils/routes';
+import Routes from '../react_utils/react_routes';
 
 // Components
 import { TextField } from '../components/inputs/textfield';

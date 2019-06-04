@@ -1,9 +1,6 @@
-module.exports = {
-    userLoggedIn,
-};
 
-const cookies = require('./utils/cookies');
-const routes = require('../data/routes');
+const cookies = require('./cookies');
+const routes = require('../routers/routes');
 const print = require('../utils/print');
 
 function userLoggedIn (req, res, next) {
@@ -17,4 +14,7 @@ function userLoggedIn (req, res, next) {
         next();
     }
 }
+module.exports.userLoggedIn = userLoggedIn;
+
+
 

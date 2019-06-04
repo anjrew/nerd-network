@@ -5,4 +5,4 @@ let instance = axios.create({
     xsrfHeaderName:'csrf-token'
 });
 
-export {instance};
+export default instance;

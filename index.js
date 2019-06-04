@@ -9,15 +9,30 @@ const csurf = require('csurf');
 const chalk = require('chalk');
 
 const routers = [
-
+    require('./routers/register')
 ];
 
-setupApp();
+// sets rendering
+app.use(cookieParser());
+
+// Very important to get the POST reests of forms
+app.use(bodyParser.json()); // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
+    extended: true
+}));
+
+app.use(cookieSession({
+    secret: `I'm always angry.`,
+    maxAge: 1000 * 60 * 60 * 24 * 14
+}));
+app.use(express.static(`${__dirname}/public`));
+
+app.use(csurf());
 
 // SECURTIY
 app.use((req, res, next) => {
     console.log(chalk.green(`Token is : ${req.csrfToken()}`));
-    res.locals.csrfToken = req.csrfToken();
+    res.cookie('mytoken', req.csrfToken());
     res.setHeader('X-FRAME-OPTIONS', 'DENY');
     next();
 });
@@ -40,6 +55,8 @@ if (process.env.NODE_ENV != 'production') {
     app.use('/bundle.js', (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
 
+app.use(...routers);
+
 // Direct the user to the welcome screen if they are not logged in
 // If there is a user ID the user must be logged in.
 app.get('/welcome', (req, res) => {
@@ -58,22 +75,4 @@ app.listen(8080, function() {
     console.log("I'm listening.");
 });
 
-function setupApp () {
 
-    // sets rendering
-    app.use(cookieParser());
-
-    // Very important to get the POST reests of forms
-    app.use(bodyParser.json()); // to support JSON-encoded bodies
-    app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
-        extended: true
-    }));
-
-    app.use(cookieSession({
-        secret: `I'm always angry.`,
-        maxAge: 1000 * 60 * 60 * 24 * 14
-    }));
-    app.use(express.static(`${__dirname}/public`));
-
-    app.use(csurf());
-}

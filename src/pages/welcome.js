@@ -1,5 +1,5 @@
 import React from 'react';
-import Routes from '../react_utils/routes';
+import Routes from '../react_utils/react_routes';
 import { CSSTransition, TransitionGroup,} from 'react-transition-group';
 
 // Components
