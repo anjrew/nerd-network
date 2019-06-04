@@ -1,7 +1,7 @@
 import React from 'react';
-import axios from '../utils/axios';
-import db from '../data/db';
-import Routes from '../data/routes';
+import axios from '../react_utils/axios';
+import db from '../react_utils/ids';
+import Routes from '../react_utils/routes';
 
 
 
@@ -24,7 +24,7 @@ export class Login extends React.Component{
                 {this.state.error && <ErrorMessage>{this.state.error}</ErrorMessage>}
                 <CenteredColumn>
                     <TextField inputType="text" label="Email" id={db.email} handleChange={this.handleChange} required/>
-                    <TextField inputType="text" label="Password" id={db.password} handleChange={this.handleChange} required/>
+                    <TextField inputType="password" label="Password" id={db.password} handleChange={this.handleChange} required/>
                     <button onClick={() => this.submit()}>Login</button>
                 </CenteredColumn>
                 <Link className='link-button' to={Routes.home}>Click here to sign up!</Link>

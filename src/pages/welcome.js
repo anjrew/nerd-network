@@ -1,5 +1,5 @@
 import React from 'react';
-import Routes from '../data/routes';
+import Routes from '../react_utils/routes';
 import { CSSTransition, TransitionGroup,} from 'react-transition-group';
 
 // Components
@@ -10,8 +10,6 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import { Registration } from '../pages/registration';
 import { Login } from '../pages/login';
 import { OverLappedChildren } from '../components/layout/overlapped_children';
-
-
 
 export class Welcome extends React.Component{
 

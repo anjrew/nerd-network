@@ -1,14 +1,13 @@
 import React from 'react';
-import axios from '../utils/axios';
-import db from '../data/db';
+import axios from '../react_utils/axios';
+import id from '../react_utils/ids';
 import { Link } from 'react-router-dom';
-import Routes from '../data/routes';
+import Routes from '../react_utils/routes';
 
 // Components
 import { TextField } from '../components/inputs/textfield';
 import { CenteredColumn } from '../components/layout/centered_column';
 import { ErrorMessage } from '../components/text/error_message';
-
 
 export class Registration extends React.Component{
 
@@ -22,10 +21,10 @@ export class Registration extends React.Component{
             <React.Fragment>
                 {this.state.error && <ErrorMessage>{this.state.error}</ErrorMessage>}
                 <CenteredColumn>
-                    <TextField inputType="text" label="First name" id={db.firstName} handleChange={this.handleChange} required/>
-                    <TextField inputType="text" label="Last name" id={db.lastName} handleChange={this.handleChange} required/>
-                    <TextField inputType="text" label="Email" id={db.email} handleChange={this.handleChange} required/>
-                    <TextField inputType="text" label="Password" id={db.password} handleChange={this.handleChange} required/>
+                    <TextField inputType="text" label="First name" id={id.firstName} handleChange={this.handleChange} required/>
+                    <TextField inputType="text" label="Last name" id={id.lastName} handleChange={this.handleChange} required/>
+                    <TextField inputType="text" label="Email" id={id.email} handleChange={this.handleChange} required/>
+                    <TextField inputType="password" label="Password" id={id.password} handleChange={this.handleChange} required/>
                     <button onClick={() => this.submit()}>Sign-up</button>
                 </CenteredColumn>
                 <Link className='link-button' to={Routes.login}>Click here to Log in!</Link>
