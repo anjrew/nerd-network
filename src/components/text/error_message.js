@@ -6,7 +6,6 @@ export class ErrorMessage extends React.Component{
 
     constructor (props) {
         super(props);
-        this.message = props.children;
         this.style = {
             color: "red",
             padding: "20px"
@@ -21,7 +20,7 @@ export class ErrorMessage extends React.Component{
                     timeout= {450}
                     classNames="scale"
                 > 
-                    <h3 style={this.style}>{this.message}</h3>
+                    <h3 style={this.style}>{this.props.children}</h3>
                 </CSSTransition>
             </TransitionGroup>
         );

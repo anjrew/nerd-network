@@ -32,7 +32,7 @@ module.exports = {
     },
     success: function (message, obj) {
         message = [
-            chalk.bgGreen(`Success: ${message}`)
+            chalk.black.bgGreen(`Success: ${message}`)
         ];
         if (obj) {
             message.push(obj);

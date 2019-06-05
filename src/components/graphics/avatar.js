@@ -4,9 +4,8 @@ export class Avatar extends React.Component{
                     
     constructor (props) {
         super(props);
-        this.onClick = props.onClick,
         this.style = props.style ? props.style : { 
-            backgroundColor: props.backgroundColor,
+            backgroundColor: props.backgroundColor ||  'white',
             padding: props.padding || '5px',
             margin: props.margin || '5px',
             height: props.height || '100px',
@@ -22,7 +21,7 @@ export class Avatar extends React.Component{
                 style={this.style} 
                 src={this.props.imageUrl || '/assets/images/nerd-avatar.png'} 
                 alt={this.props.description} 
-                onClick={this.onClick}/>
+                onClick={this.props.onClick}/>
         );
     }
 }

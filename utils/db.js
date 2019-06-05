@@ -56,7 +56,7 @@ module.exports.db = {
         );
     },
     
-    findUserId: function (id) {
+    findUserId: async function (id) {
         return db.query(
             `SELECT users.id, first, last, email, password, bio, pic_url, created_at
             FROM users

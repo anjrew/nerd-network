@@ -13,6 +13,7 @@ const routes = require('./routers/routes');
 
 
 const routers = [
+    require('./routers/user'),
     require('./routers/register'),
     require('./routers/upload'),
     require('./routers/login')

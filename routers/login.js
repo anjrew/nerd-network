@@ -8,8 +8,6 @@ const encryption = require('../utils/encryption');
 // const userLoggedInAtEntry = require('../utils/middleware').userLoggedInAtEntry;
 const print = require('../utils/print');
 
-// TODO:
-
 router.route(routes.login)
     .get((req, res) => {
         console.log('here');
@@ -25,37 +23,37 @@ router.route(routes.login)
         print.info(`Login post REQ BODY IS:`, req.body);
         print.info(`email and password was `, email + passwordAttempt);
         
-        // if (!email && !password) {
-        try {
-            const result = await db.getHashedPWord(email);
-            print.info(`Result password is `, result);
-            const hashedP = result.rows[0].password;
-            print.info('The unhashed P is ', hashedP);
-            const doesMatch = await encryption.checkPassword(passwordAttempt, hashedP);
-                
-            let userProfile;
+        if (email && passwordAttempt) {
+            try {
+                const result = await db.getHashedPWord(email);
+                print.info(`Result password is `, result);
+                const hashedP = result.rows[0].password;
+                print.info('The unhashed P is ', hashedP);
+                const doesMatch = await encryption.checkPassword(passwordAttempt, hashedP);
+                    
+                let userProfile;
 
-            if (doesMatch) { userProfile = await  db.findUserEmail(email); }
-            userProfile = userProfile.rows[0];
-            print.info('userProfile is ', userProfile);
-            print.info(' The user profile from login is ', userProfile);
-            req.session[cookies.userId] = userProfile.id;
-            res.json( userProfile );
-                
-        } catch (e) {
-            print.error(e);
+                if (doesMatch) { userProfile = await  db.findUserEmail(email); }
+                userProfile = userProfile.rows[0];
+                print.info('userProfile is ', userProfile);
+                print.info(' The user profile from login is ', userProfile);
+                req.session[cookies.userId] = userProfile.id;
+                res.json( userProfile );
+                    
+            } catch (e) {
+                print.error(e);
+                res.json({
+                    error: "Not all fields were filled"
+                });
+            }
+
+            
+        } else {
+            print.error('Not all fields were filled in login page');
             res.json({
                 error: "Not all fields were filled"
             });
         }
-
-            
-        // } else {
-        //     print.error('Not all fields were filled in login page');
-        //     res.json({
-        //         error: "Not all fields were filled"
-        //     });
-        // }
     });
 
 
