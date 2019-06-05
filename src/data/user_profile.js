@@ -7,6 +7,7 @@ export class UserProfile {
         this.first = params.first,
         this.last = params.last,
         this.imageUrl = params.imageUrl || "./placeholder.gif" ;
+        this.bio = params.bio;
         console.log('This user Profile is ', this );
     }
 }

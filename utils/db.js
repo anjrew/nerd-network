@@ -47,14 +47,13 @@ module.exports.db = {
         );
     },
 
-    updateField: async function (userId, key, value) {
-        print.warning(`userId is ${userId} - key is ${key} - value is ${value}`);
+    updateBio: async function (userId, bio) {
         return db.query(
             `UPDATE users
-            SET $2=$3
+            SET bio=$2
             WHERE id=$1
             RETURNING *;`,
-            [userId, key, value],
+            [userId, bio],
         );
     },
 

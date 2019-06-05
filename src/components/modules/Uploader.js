@@ -51,7 +51,7 @@ export class Uploader extends React.Component{
         var formData = new FormData();
         formData.append("file", this.state.file);
         try {
-            const response = await axios.post("/upload", formData);
+            const response = await axios.post(routes.upload, formData);
             console.log('The response data is ', response.data);
             this.props.changeImage(response.data.pic_url);
         } catch (e) {

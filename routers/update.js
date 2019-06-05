@@ -9,19 +9,14 @@ const print = require('../utils/print');
 router.route(routes.update)
     .post(async(req, res) => {
         const userId = req.session[cookies.userId];
-        print.props(req.body);
+        const bio = req.body.bio;
         try {
-            var result = {}
-            for (const prop in req.body) {
-                const value = req.body[prop];
-                print.info('userId is  ',  userId);
-                print.info('prop is  ',  prop);
-                print.info('value is  ',  value);
-                result = await db.updateField(userId, prop, value);
-                print.success(result);
+            let result;
+            if (bio){
+                result = await db.updateBio(userId, bio);
             }
-            print.props(user);
             const user = result.rows[0];
+            print.props(user);
             print.success("Got the user from the database with details and sending", user);
             res.json(user);
         } catch (e) {

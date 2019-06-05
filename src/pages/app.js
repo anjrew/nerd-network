@@ -46,7 +46,7 @@ export class App extends React.Component{
                 <SafeArea>
                     <Profile 
                         bioEditorIsVisible={ this.state.bioEditorIsVisible}
-                        uploadClicked={this.showUploader}
+                        uploadClicked={this.avatarClicked}
                         user={this.state.user}
                         setBio={this.setBio}
                     />
@@ -111,7 +111,14 @@ export class App extends React.Component{
         }
     }
 
-    setBio(){
-
+    setBio(bio){
+        console.log('incoming bio is', bio);
+        let user = this.state.user;
+        console.log('the user is ', user);
+        user.bio = bio;
+        this.setState({
+            user: user ,
+            bioEditorIsVisible: false
+        }, () => console.log('The new state is', this.state));
     }
 }

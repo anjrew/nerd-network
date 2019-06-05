@@ -15,7 +15,7 @@ export class Avatar extends React.Component{
     }
                     
     render(){
-        console.log('Rendering Avatar with props', this.props);
+        // console.log('Rendering Avatar with props', this.props);
         return (
             <img 
                 style={this.style} 
