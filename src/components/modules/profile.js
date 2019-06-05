@@ -20,13 +20,15 @@ export class Profile extends React.Component{
         console.log('Rendering Profile with props', this.props);
         return (
             <Row padding={'20px'}>
-                <Avatar  
+                <Avatar
+                    height ='300px'
+                    width = '300px'
                     onClick={ this.props.uploadClicked} 
                     imageUrl={this.props.user.imageUrl}
                     description="User image"
                 />
                 <CenteredColumn padding={'20px'}>
-                    <p>{`${this.props.user.first}`}</p>
+                    <h2>{`${this.props.user.first}`}</h2>
                 
                     <CSSTransition in={this.state.bioEditorIsVisible} timeout={200} classNames="scale">
                         <BioEditor

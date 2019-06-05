@@ -4,7 +4,8 @@ const routes =  {
     home: "/",
     upload: "/upload",
     user: "/user",
-    welcome: "/welcome"
+    welcome: "/welcome",
+    logout: "/logout"
 };
 
 export default routes;
