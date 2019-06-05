@@ -8,9 +8,7 @@ export class SafeArea extends React.Component{
             padding: props.padding || '20px',
         };
     }
-
     render(){
-        console.log("safe area", this);
         return (
             <div className={'safe-area'}>
                 {this.props.children}

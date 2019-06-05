@@ -15,12 +15,13 @@ export class App extends React.Component{
     constructor(){
         super();
         this.state = {
-            uploaderVisible: false
+            uploaderVisible: false,
+            imageUrl: null
         };
-
         this.dismissLoader = this.dismissLoader.bind(this);
         this.avatarClicked = this.avatarClicked.bind(this);
         this.uploadClicked = this.uploadClicked.bind(this);
+        this.changeImage = this.changeImage.bind(this);
     }
 
     render(){
@@ -29,10 +30,10 @@ export class App extends React.Component{
             <CenteredColumn>
                 <Row backgroundColor={ 'red' }>
                     <Logo height={ '100px' } width={ "100px" }/>
-                    <Avatar backgroundColor={ 'white' } onClick={ this.avatarClicked }/>
+                    <Avatar backgroundColor={ 'white' } onClick={ this.avatarClicked } imageUrl={this.state.imageUrl}/>
                 </Row>
                 <SafeArea>
-                    { this.state.uploaderVisible && <Uploader dismissLoader={ this.dismissLoader }/> }
+                    { this.state.uploaderVisible && <Uploader dismissLoader={ this.dismissLoader } changeImage={this.changeImage}/> }
                 </SafeArea>
             </CenteredColumn>
         );
@@ -71,5 +72,12 @@ export class App extends React.Component{
 
     uploadClicked(){
         console.log('Upload Button Clicked and this is', this);
+    }
+
+    changeImage(imageUrl){
+        console.log('Setting imageUrl in AppState as ',  imageUrl);
+        this.setState({
+            imageUrl: imageUrl
+        });
     }
 }

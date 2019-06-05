@@ -4,7 +4,6 @@ export class Row extends React.Component{
 
     constructor (props) {
         super(props);
-        this.children = props.children;
         this.style = { 
             display: 'flex', 
             flexDirection: 'row',
@@ -20,7 +19,7 @@ export class Row extends React.Component{
     render(){
         return (
             <div style={this.style}>
-                {this.children}
+                { this.props.children }
             </div>
         );
     }
