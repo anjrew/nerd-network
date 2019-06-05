@@ -10,30 +10,52 @@ export class Uploader extends React.Component{
     constructor(props) {
         super(props);
         this.state = {};
-    }
-
-    async upload() {
-        var formData = new FormData();
-        formData.append("file", this.state.file);
-        const imageUrl = await axios.post("/upload", formData);
-        await this.props.changeImage(imageUrl);
-    }
-
-    handleChange(e) {
-        this.setState({
-            file: e.target.files[0]
-        });
+        console.log(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.upload = this.upload.bind(this);
     }
 
     render(){
         return (
-            <Container margin="20px" padding='20px' borderRadius="20px" borderWidth="3px">
+            <Container 
+                margin="20px" 
+                padding='10px' 
+                borderRadius="20px" 
+                borderWidth="1px"
+                borderColor="black" 
+                borderStyle="solid"
+                boxShadow={true} >
                 <Row justifyContent={'flex-end'} >
-                    <button onClick={ this.dismissLoader } style={{ height: '20px', width: '20px', padding: '0px' }}>x</button>
+                    <button onClick={ this.dismissLoader } style={{ height: '30px', width: '30px', padding: '0px' }}>x</button>
                 </Row>
-                <h2>Whant to change your image?</h2>
-                <button onClick={ this.uploadClicked }>Upload</button>
+                <h2 style={{padding: '20px'}}>Whant to change your image?</h2>
+                <label>Add File...</label>
+                <p>{this.state.file}</p>
+                <input
+                    // style={{ display: 'none' }}
+                    id="upload-photo"
+                    type="file"
+                    name="file"
+                    accept="image/*"
+                    onChange={e => this.handleChange(e)}
+                />
+                <button onClick={ this.upload }>Upload</button>
             </Container>
         );
+    }
+
+    async upload() {
+        console.log('Upload clicked and this is', this);
+        var formData = new FormData();
+        formData.append("file", this.state.file);
+        const imageUrl = await axios.post("/upload", formData);
+        this.changeImage(imageUrl);
+    }
+
+    handleChange(e) {
+        console.log('File changed and this is', this);
+        this.setState({
+            file: e.target.files[0]
+        });
     }
 }

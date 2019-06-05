@@ -38,8 +38,36 @@ module.exports.db = {
                 `,
         [first, last, email, password]
         );
-    }
+    },
 
+    insertImg: function (userId, url) {
+        return db.query(
+            `UPDATE users
+            SET pic_url=$2
+            WHERE id=$1;`,
+            [userId, url]
+        );
+    },
+
+    findUser: function findUser(email) {
+        return db.query(
+            `SELECT users.id, first, last, email, password, bio, pic_url, created_at
+            FROM users
+            WHERE email=$1;
+            `,
+            [email]
+        );
+    },
+    
+    findUserId: function findUser(id) {
+        return db.query(
+            `SELECT users.id, first, last, email, password, bio, pic_url, created_at
+            FROM users
+            WHERE id=$1;
+            `,
+            [id]
+        );
+    }
 };
 
 

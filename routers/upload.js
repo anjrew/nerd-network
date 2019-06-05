@@ -8,7 +8,7 @@ const multer = require('multer');
 // Changes the name of the file to be somthing unique
 const uidSafe = require('uid-safe');
 const path = require('path');
-const s3 = require('../utils/s3s3');
+const s3 = require('../utils/s3');
 const encryption = require('../utils/encryption');
 
 let secrets;
@@ -78,17 +78,17 @@ router.route(routes.upload)
         }
     });
 
-router.route(ROUTES.UPLOAD)
-    .get((req, res, next) => {
-        db.getImages().then((result) => {
-            res.json(result.rows);
-        }).catch((e) => {
-            console.log(chalk.red(`error`));
-            res.sendStatus(500).json({
-                success: false,
-                message: 'Failed to communicate with the server.'
-            });
-        });
-    });
+// router.route(ROUTES.UPLOAD)
+//     .get((req, res, next) => {
+//         db.getImages().then((result) => {
+//             res.json(result.rows);
+//         }).catch((e) => {
+//             console.log(chalk.red(`error`));
+//             res.sendStatus(500).json({
+//                 success: false,
+//                 message: 'Failed to communicate with the server.'
+//             });
+//         });
+//     });
 
 module.exports = router;

@@ -27,7 +27,7 @@ export class App extends React.Component{
     render(){
         return (
             <CenteredColumn>
-                <Row backgroundColor={ 'red' } padding={ '20px' }>
+                <Row backgroundColor={ 'red' }>
                     <Logo height={ '100px' } width={ "100px" }/>
                     <Avatar backgroundColor={ 'white' } onClick={ this.avatarClicked }/>
                 </Row>

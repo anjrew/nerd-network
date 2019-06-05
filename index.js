@@ -9,7 +9,8 @@ const csurf = require('csurf');
 const chalk = require('chalk');
 
 const routers = [
-    require('./routers/register')
+    require('./routers/register'),
+    require('./routers/upload')
 ];
 
 // sets rendering
