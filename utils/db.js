@@ -15,14 +15,7 @@ module.exports.ids = {
 };
 
 module.exports.db = {
-    
-    getUserProfileById: function (id) {
-        return db.query(`
-        SELECT first,last,email
-        FROM users`,
-        [id]
-        );
-    },
+
     getHashedPWord: function (email) {
         return db.query(`
             SELECT password

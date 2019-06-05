@@ -21,21 +21,25 @@ router.route(routes.login)
     .post(async (req, res) => {
 
         const email = req.body.email;
-        const password = req.body.password;
+        const passwordAttempt = req.body.password;
         print.info(`Login post REQ BODY IS:`, req.body);
-        print.info(`email and password was `, email + password);
+        print.info(`email and password was `, email + passwordAttempt);
         
         // if (!email && !password) {
         try {
             const result = await db.getHashedPWord(email);
-            print.info(`Result password`, result);
-            const doesMatch = await encryption.checkPassword(password, result.rows[0].password);
+            print.info(`Result password is `, result);
+            const hashedP = result.rows[0].password;
+            print.info('The unhashed P is ', hashedP);
+            const doesMatch = await encryption.checkPassword(passwordAttempt, hashedP);
                 
             let userProfile;
 
-            if (doesMatch) { userProfile = await  db.findUserEmail(email).rows[0]; }
+            if (doesMatch) { userProfile = await  db.findUserEmail(email); }
+            userProfile = userProfile.rows[0];
+            print.info('userProfile is ', userProfile);
             print.info(' The user profile from login is ', userProfile);
-            req.session[cookies.user] = userProfile.id;
+            req.session[cookies.userId] = userProfile.id;
             res.json( userProfile );
                 
         } catch (e) {
