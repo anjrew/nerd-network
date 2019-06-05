@@ -2,7 +2,6 @@ import React from 'react';
 import { CenteredColumn } from '../layout/centered_column';
 import { TextArea } from '../inputs/text_area';
 
-
 export class BioEditor extends React.Component{
 
     constructor (props) {
@@ -26,7 +25,7 @@ export class BioEditor extends React.Component{
                         value={this.state.bio} 
                         handleChange={this.handleChange}
                     />
-                    <button onClick={this.props.setBio}>Save</button>
+                    <button onClick={() => this.props.setBio(this.state.bio)}>Save</button>
                 </CenteredColumn>
             );
         } else {

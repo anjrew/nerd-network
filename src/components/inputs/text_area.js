@@ -22,5 +22,4 @@ export class TextArea extends React.Component {
             />
         );
     }
-    
 }

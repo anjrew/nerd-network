@@ -20,8 +20,6 @@ router.route(routes.login)
 
         const email = req.body.email;
         const passwordAttempt = req.body.password;
-        print.info(`Login post REQ BODY IS:`, req.body);
-        print.info(`email and password was `, email + passwordAttempt);
         
         if (email && passwordAttempt) {
             try {

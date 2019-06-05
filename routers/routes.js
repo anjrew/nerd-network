@@ -5,7 +5,8 @@ const routes =  {
     upload: "/upload",
     user: "/user",
     welcome: "/welcome",
-    logout: "/logout"
+    logout: "/logout",
+    update: "/update"
 };
 
 module.exports = routes;

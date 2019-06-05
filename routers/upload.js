@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const routes = require('./routes');
-const { db, ids } = require('../utils/db');
+const { db } = require('../utils/db');
 const chalk = require('chalk');
 // Used to upload files to the hard drive
 const multer = require('multer');
@@ -9,7 +9,6 @@ const multer = require('multer');
 const uidSafe = require('uid-safe');
 const path = require('path');
 const s3 = require('../utils/s3');
-const encryption = require('../utils/encryption');
 const print = require('../utils/print');
 const cookies = require('../utils/cookies');
 
@@ -19,7 +18,6 @@ if (process.env.NODE_ENV === 'production') {
 } else {
     secrets = require('../secrets'); // secrets.json is in .gitignore
 }
-
 
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
@@ -51,10 +49,16 @@ router.route(routes.upload)
             print.info("Req session info is", req.session);
             const url = secrets.AWS_URL + req.file.filename;
             const userId = req.session[cookies.userId];
-            var result = await db.insertImg(userId, url);
-            print.info("The result of the query is", result);
-            res.status(200).json(result.rows[0]);
-
+            try {
+                var result = await db.insertImg(userId, url);
+                print.info("The result of the query is", result);
+                res.status(200).json(result.rows[0]);
+            } catch (e) {
+                res.status(500).json({
+                    success: false,
+                    error: e
+                });
+            }
         } else {
             console.log(chalk.red(`Error uploading to the server`));
             res.status(500).json({

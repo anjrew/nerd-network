@@ -4,7 +4,8 @@ import { Avatar } from '../graphics/avatar';
 import { BioEditor } from '../modules/bio_editor';
 import { CenteredColumn } from '../layout/centered_column';
 import { CSSTransition } from 'react-transition-group';
-
+import axios from '../../react_utils/axios';
+import routes from '../../react_utils/react_routes';
 
 export class Profile extends React.Component{
 
@@ -13,7 +14,7 @@ export class Profile extends React.Component{
         this.state = {
             bioEditorIsVisible: false
         };
-        this.setBio = this.setBio.bind();
+        this.setBio = this.setBio.bind(this);
     }
 
     render(){
@@ -28,21 +29,27 @@ export class Profile extends React.Component{
                     description="User image"
                 />
                 <CenteredColumn padding={'20px'}>
-                    <h2>{`${this.props.user.first}`}</h2>
-                
+                    <h2>{`${this.props.user.first}`}</h2>              
                     <CSSTransition in={this.state.bioEditorIsVisible} timeout={200} classNames="scale">
                         <BioEditor
                             bio={this.props.user.bio}
                             setBio={this.setBio}
                         />
                     </CSSTransition>
-                   
                 </CenteredColumn>
             </Row>
         );
     }
 
-    setBio(){
-
+    async setBio(bio){
+        const data = { bio: bio};
+        console.log('The data in the post request is' , data);
+        try {
+            const response = await axios.post(routes.update, data);
+            console.log('The response data is ', response.data);
+            this.props.changeImage(response.data.pic_url);
+        } catch (e) {
+            console.log('The axios call to upload the file failed with error', e);
+        }
     }
 }

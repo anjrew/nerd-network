@@ -1,6 +1,7 @@
 
 const spicedPg = require('spiced-pg');
 const relation = 'nerd-network';
+const print = require('../utils/print');
 
 // process.env.NODE_ENV === "production" ? secrets = process.env : secrets = require('./secrets');
 const dbUrl = process.env.DATABASE_URL || `postgres:postgres:postgres@localhost:5432/${relation}`;
@@ -43,6 +44,17 @@ module.exports.db = {
             WHERE id=$1
             RETURNING pic_url;`,
             [userId, url],
+        );
+    },
+
+    updateField: async function (userId, key, value) {
+        print.warning(`userId is ${userId} - key is ${key} - value is ${value}`);
+        return db.query(
+            `UPDATE users
+            SET $2=$3
+            WHERE id=$1
+            RETURNING *;`,
+            [userId, key, value],
         );
     },
 

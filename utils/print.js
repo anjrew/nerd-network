@@ -38,5 +38,14 @@ module.exports = {
             message.push(obj);
         }
         console.log(...message);
+    },
+    props: function (obj) {
+        const message = [
+            chalk.bgMagenta(`Props:`)
+        ];
+        if (obj) {
+            message.push(obj);
+        }
+        console.log(...message);
     }
 };
