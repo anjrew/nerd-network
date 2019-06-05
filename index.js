@@ -7,11 +7,16 @@ const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const csurf = require('csurf');
 const chalk = require('chalk');
+const path = require('path');
+const print = require('./utils/print');
+
 
 const routers = [
     require('./routers/register'),
     require('./routers/upload')
 ];
+
+global.appRoot = path.resolve(__dirname);
 
 // sets rendering
 app.use(cookieParser());
@@ -43,6 +48,12 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use((req, res, next) => {
+    console.log(chalk.blue(`Cookie session variables: `), req.session);
+    next();
+});
+
+
 app.use(compression());
 
 if (process.env.NODE_ENV != 'production') {
@@ -62,7 +73,8 @@ app.use(...routers);
 // If there is a user ID the user must be logged in.
 app.get('/welcome', (req, res) => {
     if (req.session.userId) {
-        res.redirec('/');
+        print.warning('Redirecting to home');
+        res.redirect('/');
     } else {
         res.sendFile(__dirname + '/index.html');
     }

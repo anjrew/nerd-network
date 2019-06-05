@@ -54,13 +54,14 @@ export class Registration extends React.Component{
             password: this.state.password,
         }).then((response) => {
             console.log('The signup got a response of', response);
-            if (response.success){
-                location.replace('/');
-            } else if (response.data.error){
+            if (response.data.error){
                 console.log('Logging Error');
                 this.setState({
                     error: response.data.error,
                 });
+            } else {
+                location.replace('/');
+                // this.switchToLogin();
             }
         }).catch((e) =>{
             console.log('The error came from the Axios call: ', e);

@@ -2,7 +2,6 @@ import React from 'react';
 import axios from '../react_utils/axios';
 import routes from '../react_utils/react_routes';
 
-
 // Components
 import { Logo } from '../components/graphics/logo';
 import { SafeArea } from '../components/layout/safe_area';
@@ -16,7 +15,7 @@ export class App extends React.Component{
     constructor(){
         super();
         this.state = {
-            uploaderVisible: true
+            uploaderVisible: false
         };
 
         this.dismissLoader = this.dismissLoader.bind(this);
@@ -25,6 +24,7 @@ export class App extends React.Component{
     }
 
     render(){
+        console.log('Rendering app with state', this);
         return (
             <CenteredColumn>
                 <Row backgroundColor={ 'red' }>
@@ -32,7 +32,7 @@ export class App extends React.Component{
                     <Avatar backgroundColor={ 'white' } onClick={ this.avatarClicked }/>
                 </Row>
                 <SafeArea>
-                    { this.state.uploaderVisible && (<Uploader/>) }
+                    { this.state.uploaderVisible && <Uploader dismissLoader={ this.dismissLoader }/> }
                 </SafeArea>
             </CenteredColumn>
         );
@@ -41,23 +41,27 @@ export class App extends React.Component{
     componentDidMount() {
         axios.get(routes.user).then(res => {
             this.setState({
-                bio: res.data.bio,
-                profile_creation_date: res.data.created_at,
-                email: res.data.email,
-                name: res.data.name,
-                surname: res.data.surname,
-                imageUrl: res.data.pic_url || "./placeholder.gif"
+                user: {
+                    bio: res.data.bio,
+                    profile_creation_date: res.data.created_at,
+                    email: res.data.email,
+                    name: res.data.name,
+                    surname: res.data.surname,
+                    imageUrl: res.data.pic_url || "./placeholder.gif"
+                }
             });
         });
     }
 
     dismissLoader(){
         console.log('Dismissing the Uploader and this is ', this);
-
+        this.setState({
+            uploaderVisible: false
+        });
     }
 
     avatarClicked(){
-        console.log('Avatar Clicked and this is', this);
+        console.log('Avatar Clicked and this is', this.state.uploaderVisible);
         if (this.state.uploaderVisible) {
             this.setState({ uploaderVisible: false });
         } else {

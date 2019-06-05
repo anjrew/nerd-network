@@ -4,7 +4,6 @@ export class CenteredColumn extends React.Component{
 
     constructor (props) {
         super(props);
-        this.children = props.children;
         this.style = {
             display:'flex',
             flexDirection: 'column',
@@ -14,10 +13,11 @@ export class CenteredColumn extends React.Component{
             alignContent: 'center'
         };
     }
+    
     render(){
         return (
-            <div style={this.style} className={'centeredColumn'}>
-                {this.children}
+            <div style={this.style}>
+                {this.props.children}
             </div>
         );
     }

@@ -4,17 +4,16 @@ export class SafeArea extends React.Component{
 
     constructor (props) {
         super(props);
-        this.children = props.children;
         this.style = {
             padding: props.padding || '20px',
         };
     }
 
     render(){
-        console.log(this);
+        console.log("safe area", this);
         return (
             <div className={'safe-area'}>
-                {this.children}
+                {this.props.children}
             </div>
         );
     }

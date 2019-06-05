@@ -7,6 +7,7 @@ const dbUrl = process.env.DATABASE_URL || `postgres:postgres:postgres@localhost:
 const db = spicedPg(dbUrl);
 
 module.exports.ids = {
+    userId: 'userId',
     firstName: 'firstName',
     lastName: 'lastName',
     email: 'email',
@@ -40,12 +41,13 @@ module.exports.db = {
         );
     },
 
-    insertImg: function (userId, url) {
+    insertImg: async function (userId, url) {
         return db.query(
             `UPDATE users
             SET pic_url=$2
-            WHERE id=$1;`,
-            [userId, url]
+            WHERE id=$1
+            RETURNING pic_url;`,
+            [userId, url],
         );
     },
 

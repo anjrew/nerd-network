@@ -2,16 +2,41 @@ const chalk = require('chalk');
 
 
 module.exports = {
-    error: function (message) {
-        console.log(chalk.red(`Error: ${message}`));
+    error: function (message, obj) {
+        message = [
+            chalk.red(`Error: ${message}`)
+        ];
+
+        if (obj) {
+            message.push(obj);
+        }
+        console.log(...message);
     },
-    info: function (message) {
-        console.log(chalk.bgBlue(`Info: ${message}`));
+    info: function (message, obj) {
+        message = [
+            chalk.bgBlue(`Info: ${message}`)
+        ];
+        if(obj) {
+            message.push(obj);
+        }
+        console.log(...message);
     },
-    warning: function (message) {
-        console.log(chalk.bgYellow(`Warning: ${message}`));
+    warning: function (message, obj) {
+        message = [
+            chalk.black.bgYellow(`Warning: ${message}`)
+        ];
+        if (obj) {
+            message.push(obj);
+        }
+        console.log(...message);
     },
-    success: function (message) {
-        console.log(chalk.bgGreen(`Success: ${message}`));
+    success: function (message, obj) {
+        message = [
+            chalk.bgGreen(`Success: ${message}`)
+        ];
+        if (obj) {
+            message.push(obj);
+        }
+        console.log(...message);
     }
 };

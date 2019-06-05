@@ -10,9 +10,10 @@ export class Uploader extends React.Component{
     constructor(props) {
         super(props);
         this.state = {};
-        console.log(this);
         this.handleChange = this.handleChange.bind(this);
         this.upload = this.upload.bind(this);
+        // this.dismissLoader = this.dismissLoader.bind(this);
+        // this.dismissLoader = props.dismissLoader;
     }
 
     render(){
@@ -26,9 +27,9 @@ export class Uploader extends React.Component{
                 borderStyle="solid"
                 boxShadow={true} >
                 <Row justifyContent={'flex-end'} >
-                    <button onClick={ this.dismissLoader } style={{ height: '30px', width: '30px', padding: '0px' }}>x</button>
+                    <button onClick={ this.props.dismissLoader } style={{ height: '30px', width: '30px', padding: '0px' }}>x</button>
                 </Row>
-                <h2 style={{padding: '20px'}}>Whant to change your image?</h2>
+                <h2 style={{padding: '20px'}}>Want to change your image?</h2>
                 <label>Add File...</label>
                 <p>{this.state.file}</p>
                 <input
@@ -48,8 +49,13 @@ export class Uploader extends React.Component{
         console.log('Upload clicked and this is', this);
         var formData = new FormData();
         formData.append("file", this.state.file);
-        const imageUrl = await axios.post("/upload", formData);
-        this.changeImage(imageUrl);
+        try {
+            const imageUrl = await axios.post("/upload", formData);
+            console.log('The image url is ', imageUrl);
+            this.changeImage(imageUrl);
+        } catch (e) {
+            console.log('The axios call to upload the file failed');
+        }
     }
 
     handleChange(e) {
@@ -57,5 +63,9 @@ export class Uploader extends React.Component{
         this.setState({
             file: e.target.files[0]
         });
+    }
+
+    dismissLoader(){
+        console.log('Dismissing uploader and this is', this);
     }
 }
