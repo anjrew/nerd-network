@@ -40,20 +40,20 @@ export class Login extends React.Component{
 
     
     submit(){
-        console.log('Sign up button pressed');
+        console.log('Login button pressed');
         console.log(this.state);
         axios.post(routes.login, {
             email: this.state.email,
             password: this.state.password,
         }).then((response) => {
             console.log('The Login got a response of', response);
-            if (response.success){
-                location.replace('/');
-            } else if (response.data.error){
+            if (response.data.error){
                 console.log('Logging Error');
                 this.setState({
                     error: response.data.error,
                 });
+            } else {
+                location.replace('/');
             }
         }).catch((e) =>{
             console.log('The error came from the Axios call: ', e);

@@ -25,7 +25,9 @@ module.exports.db = {
     },
     getHashedPWord: function (email) {
         return db.query(`
-            SELECT password FROM users WHERE $1 = email; 
+            SELECT password
+            FROM users 
+            WHERE $1 = email; 
             `,
         [email]
         );

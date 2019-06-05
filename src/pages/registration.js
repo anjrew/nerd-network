@@ -55,7 +55,7 @@ export class Registration extends React.Component{
         }).then((response) => {
             console.log('The signup got a response of', response);
             if (response.data.error){
-                console.log('Logging Error');
+                console.log('Registration Error');
                 this.setState({
                     error: response.data.error,
                 });

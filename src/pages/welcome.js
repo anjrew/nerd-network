@@ -37,8 +37,7 @@ export class Welcome extends React.Component{
                                         </OverLappedChildren>             
                                     </CSSTransition>
                                 </TransitionGroup>
-                            );
-                                
+                            );  
                         }}
                         />
                     </HashRouter>

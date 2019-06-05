@@ -13,12 +13,10 @@ router.route(routes.registration)
     .get((req, res) => {
         console.log('here');
         res.json({
-            error: 'This asgvav'
+            error: 'This Get error'
         });
     })
-
     .post(async (req, res) => {
-
         const firstName = req.body.firstName;
         const lastName = req.body.lastName;
         const email = req.body.email;
@@ -31,10 +29,9 @@ router.route(routes.registration)
             res.json({
                 error: "Not all fields were filled"
             });
-        } else {
 
-            try {
-                
+        } else {
+            try { 
                 const hashedP = await encryption.hashPassword(req.body.password);
                 const result = await db.addUser(firstName, lastName, email, hashedP);
                 let id = result.rows[0].id;

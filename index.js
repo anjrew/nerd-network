@@ -9,11 +9,13 @@ const csurf = require('csurf');
 const chalk = require('chalk');
 const path = require('path');
 const print = require('./utils/print');
+const routes = require('./routers/routes');
 
 
 const routers = [
     require('./routers/register'),
-    require('./routers/upload')
+    require('./routers/upload'),
+    require('./routers/login')
 ];
 
 global.appRoot = path.resolve(__dirname);
@@ -81,7 +83,11 @@ app.get('/welcome', (req, res) => {
 });
 
 app.get('*', function(req, res) {
-    res.sendFile(__dirname + '/index.html');
+    if (!req.session.userId){
+        res.redirect(routes.welcome);
+    } else {
+        res.sendFile(__dirname + '/index.html');
+    }
 });
 
 app.listen(8080, function() {
