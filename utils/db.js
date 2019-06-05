@@ -49,7 +49,7 @@ module.exports.db = {
         );
     },
 
-    findUser: function findUser(email) {
+    findUserEmail: function (email) {
         return db.query(
             `SELECT users.id, first, last, email, password, bio, pic_url, created_at
             FROM users
@@ -59,7 +59,7 @@ module.exports.db = {
         );
     },
     
-    findUserId: function findUser(id) {
+    findUserId: function (id) {
         return db.query(
             `SELECT users.id, first, last, email, password, bio, pic_url, created_at
             FROM users
